@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../models/models.dart';
+import '../widgets/widgets.dart';
+
 class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
 
@@ -56,6 +59,9 @@ class TasksScreen extends StatelessWidget {
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
                   ),
+                ),
+                child: TasksList(
+                  tasks: Tasks.tasks,
                 ),
               ),
             ),
