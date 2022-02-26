@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_list_flutter/providers/tasks_provider.dart';
+import 'package:todo_list_flutter/screens/screens.dart';
+import 'package:todo_list_flutter/theme/theme.dart';
 
-import '../models/models.dart';
 import '../widgets/widgets.dart';
 
 class TasksScreen extends StatelessWidget {
@@ -10,30 +13,32 @@ class TasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tasksProvider = Provider.of<TasksProvider>(context);
+    final tasksNotCompleted = tasksProvider.tasksNotCompleted();
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: Theme.of(context).primaryColor,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(30),
+              padding: const EdgeInsets.all(40),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   CircleAvatar(
                     child: Icon(
                       Icons.list,
                       size: 30,
-                      color: Colors.lightBlueAccent,
+                      color: Theme.of(context).primaryColor,
                     ),
                     backgroundColor: Colors.white,
                     radius: 30,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     'To-Do List',
                     style: TextStyle(
                       fontSize: 50,
@@ -42,8 +47,8 @@ class TasksScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '12 Tasks',
-                    style: TextStyle(
+                    '$tasksNotCompleted Tasks',
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                     ),
@@ -53,15 +58,9 @@ class TasksScreen extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                ),
+                decoration: AppTheme.boxDecoration,
                 child: TasksList(
-                  tasks: Tasks.tasks,
+                  tasksProvider: tasksProvider,
                 ),
               ),
             ),
@@ -69,8 +68,15 @@ class TasksScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.lightBlueAccent,
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return const AddTaskScreen();
+            },
+          );
+        },
+        backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add),
       ),
     );
