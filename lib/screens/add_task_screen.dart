@@ -12,54 +12,54 @@ class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tasksProvider = Provider.of<TasksProvider>(context, listen: false);
-    return Stack(
-      children: [
-        Container(
-          color: const Color(0xff757575),
-        ),
-        Container(
-          decoration: AppTheme.boxDecoration,
-          padding: const EdgeInsets.all(40),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Add Task',
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 30,
-                ),
-              ),
-              TextField(
-                onChanged: (value) {
-                  if (value != '') {
-                    tasksProvider.newTask = value.trim();
-                  }
-                },
-                cursorColor: Theme.of(context).primaryColor,
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.all(15),
-                  elevation: 0,
-                  primary: Theme.of(context).primaryColor,
-                  minimumSize: const Size.fromHeight(0),
-                ),
-                onPressed: () {
-                  if (tasksProvider.newTask != '') {
-                    tasksProvider.addTask();
-                    Navigator.pop(context);
-                  }
-                },
-                child: const Text('Add'),
-              )
-            ],
+    return SingleChildScrollView(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Stack(
+        children: [
+          Container(
+            color: const Color(0xff757575),
           ),
-        ),
-      ],
+          Container(
+            decoration: AppTheme.boxDecoration,
+            padding: const EdgeInsets.all(40),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Add Task',
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 30,
+                  ),
+                ),
+                TextField(
+                  onChanged: (value) {
+                    if (value != '') {
+                      tasksProvider.newTask = value.trim();
+                    }
+                  },
+                  autofocus: true,
+                  cursorColor: Theme.of(context).primaryColor,
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (tasksProvider.newTask != '') {
+                      tasksProvider.addTask();
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: const Text('Add'),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

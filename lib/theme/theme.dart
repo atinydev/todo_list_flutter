@@ -14,22 +14,30 @@ class AppTheme {
   );
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
-    primaryColor: primaryColor,
-    inputDecorationTheme: const InputDecorationTheme(
-      enabledBorder: UnderlineInputBorder(
-        borderSide: BorderSide(
-          color: primaryColor,
+      primaryColor: primaryColor,
+      inputDecorationTheme: const InputDecorationTheme(
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: primaryColor,
+          ),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            width: 2,
+            color: primaryColor,
+          ),
         ),
       ),
-      focusedBorder: UnderlineInputBorder(
-        borderSide: BorderSide(
-          width: 2,
-          color: primaryColor,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.all(15),
+          elevation: 0,
+          primary: primaryColor,
+          minimumSize: const Size.fromHeight(0),
         ),
-      ),
-    ),
-    // textTheme: lightTextTheme,
-  );
+      )
+      // textTheme: lightTextTheme,
+      );
 
   // static const TextTheme lightTextTheme = TextTheme();
 
