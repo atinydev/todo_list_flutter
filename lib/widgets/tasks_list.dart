@@ -29,7 +29,7 @@ class TasksList extends StatelessWidget {
           child: _TaskTile(
             task: task,
             onChanged: (value) {
-              tasksProvider.checkTask(value ?? false, index);
+              tasksProvider.checkTask(task);
             },
           ),
         );

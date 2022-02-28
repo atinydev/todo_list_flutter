@@ -54,7 +54,7 @@ class AddTaskScreen extends StatelessWidget {
                     }
                   },
                   child: const Text('Add'),
-                )
+                ),
               ],
             ),
           ),

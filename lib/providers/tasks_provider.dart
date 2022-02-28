@@ -7,8 +7,8 @@ class TasksProvider extends ChangeNotifier {
 
   var newTask = '';
 
-  void checkTask(bool isChecked, int index) {
-    tasks[index].isChecked = isChecked;
+  void checkTask(Task task) {
+    task.toggleDone();
     notifyListeners();
   }
 
@@ -23,7 +23,7 @@ class TasksProvider extends ChangeNotifier {
 
   void addTask() {
     tasks.add(
-      Task(text: newTask, isChecked: false),
+      Task(text: newTask),
     );
     newTask = '';
     notifyListeners();
