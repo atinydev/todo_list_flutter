@@ -1,9 +1,13 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
 import '../models/models.dart';
 
 class TasksProvider extends ChangeNotifier {
-  var tasks = <Task>[];
+  final _tasks = <Task>[];
+
+  UnmodifiableListView<Task> get tasks => UnmodifiableListView(_tasks);
 
   var newTask = '';
 
@@ -13,16 +17,16 @@ class TasksProvider extends ChangeNotifier {
   }
 
   void deleteTask(int index) {
-    tasks.removeAt(index);
+    _tasks.removeAt(index);
     notifyListeners();
   }
 
   int get tasksNotCompleted {
-    return tasks.where((task) => !task.isChecked).length;
+    return _tasks.where((task) => !task.isChecked).length;
   }
 
   void addTask() {
-    tasks.add(
+    _tasks.add(
       Task(text: newTask),
     );
     newTask = '';
