@@ -11,26 +11,29 @@ class TasksList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tasksProvider = Provider.of<TasksProvider>(context);
-    final tasks = tasksProvider.tasks;
-    return ListView.builder(
-      itemCount: tasks.length,
-      itemBuilder: (context, index) {
-        final task = tasks[index];
-        return Dismissible(
-          background: Container(
-            color: Colors.red,
-          ),
-          key: UniqueKey(),
-          onDismissed: (direction) {
-            tasksProvider.deleteTask(index);
+    return Consumer<TasksProvider>(
+      builder: (context, tasksProvider, child) {
+        final tasks = tasksProvider.tasks;
+        return ListView.builder(
+          itemCount: tasks.length,
+          itemBuilder: (context, index) {
+            final task = tasks[index];
+            return Dismissible(
+              background: Container(
+                color: Colors.red,
+              ),
+              key: UniqueKey(),
+              onDismissed: (direction) {
+                tasksProvider.deleteTask(index);
+              },
+              child: _TaskTile(
+                task: task,
+                onChanged: (value) {
+                  tasksProvider.checkTask(task);
+                },
+              ),
+            );
           },
-          child: _TaskTile(
-            task: task,
-            onChanged: (value) {
-              tasksProvider.checkTask(task);
-            },
-          ),
         );
       },
     );

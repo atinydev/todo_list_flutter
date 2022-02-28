@@ -13,8 +13,8 @@ class TasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tasksProvider = Provider.of<TasksProvider>(context);
-    final tasksNotCompleted = tasksProvider.tasksNotCompleted();
+    final tasksNotCompleted =
+        Provider.of<TasksProvider>(context).tasksNotCompleted();
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: SafeArea(
