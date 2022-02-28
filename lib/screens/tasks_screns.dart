@@ -59,9 +59,7 @@ class TasksScreen extends StatelessWidget {
             Expanded(
               child: Container(
                 decoration: AppTheme.boxDecoration,
-                child: TasksList(
-                  tasksProvider: tasksProvider,
-                ),
+                child: const TasksList(),
               ),
             ),
           ],

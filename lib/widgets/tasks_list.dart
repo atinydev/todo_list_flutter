@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/models.dart';
 import '../providers/providers.dart';
@@ -6,13 +7,11 @@ import '../providers/providers.dart';
 class TasksList extends StatelessWidget {
   const TasksList({
     Key? key,
-    required this.tasksProvider,
   }) : super(key: key);
-
-  final TasksProvider tasksProvider;
 
   @override
   Widget build(BuildContext context) {
+    final tasksProvider = Provider.of<TasksProvider>(context);
     final tasks = tasksProvider.tasks;
     return ListView.builder(
       itemCount: tasks.length,
