@@ -70,6 +70,9 @@ class TasksScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
+            shape: const RoundedRectangleBorder(
+              borderRadius: AppTheme.borderRadius,
+            ),
             isScrollControlled: true,
             context: context,
             builder: (context) {
