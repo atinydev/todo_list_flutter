@@ -17,7 +17,7 @@ class TasksProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  int tasksNotCompleted() {
+  int get tasksNotCompleted {
     return tasks.where((task) => !task.isChecked).length;
   }
 
